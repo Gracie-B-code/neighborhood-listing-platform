@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <main className="min-h-screen p-8 max-w-4xl mx-auto font-sans bg-gray-50 text-gray-900">
       <header className="mb-8 border-b pb-4">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-950">
           Neighborhood Listing Platform
         </h1>
         <p className="mt-2 text-gray-600 leading-relaxed">
