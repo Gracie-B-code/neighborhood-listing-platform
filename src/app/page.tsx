@@ -3,7 +3,7 @@
 import { Property, Sponsor } from '@/types';
 import { PropertyCard } from '@/components/PropertyCard';
 import { SponsorBanner } from '@/components/SponsorBanner';
-import { SearchFilters } from '@/components/SearchFilter';
+import { SearchFilters } from '@/components/SearchFilters'; // Fixed import name (plural)
 
 const sampleSponsor: Sponsor = {
   id: 'sponsor-1',
@@ -51,15 +51,20 @@ const sampleProperties: Property[] = [
 export default function Home() {
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Neighborhood Listings</h1>
+      <header className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-900">Neighborhood Listings</h1>
+        <p className="text-gray-600 mt-1">
+          Explore local homes, find community partners, and search available rentals.
+        </p>
+      </header>
 
-      <SearchFilters onFilterSubmit={(filters) => console.log(filters)} />
+      <SearchFilters onFilterSubmit={(filters) => console.log('Filters applied:', filters)} />
 
       <SponsorBanner sponsor={sampleSponsor} />
 
-      {/* Responsive Grid: 1 col on small, 2 on medium, 3 on large */}
-      <section aria-labelledby="listings-heading">
-        <h2 id="listings-heading" className="text-2xl font-semibold mb-4">
+      {/* Responsive Grid Section */}
+      <section aria-labelledby="listings-heading" className="mt-8">
+        <h2 id="listings-heading" className="text-2xl font-semibold text-gray-900 mb-4">
           Available Properties
         </h2>
 
