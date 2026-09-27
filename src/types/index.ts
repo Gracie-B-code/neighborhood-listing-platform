@@ -1,16 +1,26 @@
-export interface Sponsor {
-  id: string;
-  name: string;
-  logoUrl?: string;
-  websiteUrl?: string;
-}
-
 export interface Property {
   id: string;
   title: string;
-  description: string;
   address: string;
   price: number;
-  sponsor?: Sponsor;
-  createdAt: string;
+  bedrooms: number;
+  bathrooms: number;
+  squareFeet: number;
+  imageUrl: string;
+  imageAlt: string;
+}
+
+export interface Sponsor {
+  id: string;
+  name: string;
+  tagline: string;
+  websiteUrl: string;
+}
+
+export interface FilterState {
+  searchQuery?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  bedrooms?: number;
+  propertyType?: string;
 }

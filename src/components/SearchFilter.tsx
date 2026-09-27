@@ -20,7 +20,13 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
       return;
     }
     setError(null);
-    onFilterSubmit({ query, minPrice, propertyType });
+    
+    // Parse minPrice from string to number here
+    onFilterSubmit({ 
+      searchQuery: query, 
+      minPrice: Number(minPrice), 
+      propertyType 
+    });
   };
 
   return (
