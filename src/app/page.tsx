@@ -3,7 +3,7 @@
 import { Property, Sponsor } from '@/types';
 import { PropertyCard } from '@/components/PropertyCard';
 import { SponsorBanner } from '@/components/SponsorBanner';
-import { SearchFilters } from '@/components/SearchFilters';
+import { SearchFilter } from '@/components/SearchFilter';
 
 const sampleSponsor: Sponsor = {
   id: 'sponsor-1',
@@ -53,7 +53,7 @@ export default function Home() {
     <main className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Neighborhood Listings</h1>
 
-      <SearchFilters onFilterSubmit={(filters) => console.log(filters)} />
+      <SearchFilter onFilterSubmit={(filters) => console.log(filters)} />
 
       <SponsorBanner sponsor={sampleSponsor} />
 
