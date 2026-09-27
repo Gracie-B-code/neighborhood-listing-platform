@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Property } from '@/types';
 
 interface PropertyCardProps {
@@ -14,17 +15,18 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
           alt={property.imageAlt}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
       <div className="p-4 flex flex-col flex-1">
         <h3 className="text-xl font-bold text-gray-900 mb-1">
-          <a
+          <Link
             href={`/properties/${property.id}`}
             className="focus:outline-none focus-visible:underline hover:underline text-blue-800"
           >
             {property.title}
-          </a>
+          </Link>
         </h3>
 
         <address className="not-italic text-sm text-gray-600 mb-3">
@@ -42,13 +44,13 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
           <li><strong>{property.squareFeet.toLocaleString()}</strong> sqft</li>
         </ul>
 
-        <a
+        <Link
           href={`/properties/${property.id}`}
           className="inline-block text-center bg-blue-600 text-white font-medium py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
           aria-label={`View details for ${property.title} at ${property.address}`}
         >
           View Listing Details
-        </a>
+        </Link>
       </div>
     </article>
   );
