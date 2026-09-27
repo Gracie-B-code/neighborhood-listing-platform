@@ -2,7 +2,7 @@
 
 import { Property, Sponsor } from '@/types';
 import { PropertyCard } from '@/components/PropertyCard';
-import SponsorBanner from '@/components/SponsorBanner';
+import { SponsorBanner } from '@/components/SponsorBanner';
 import { SearchFilters } from '@/components/SearchFilter';
 
 const sampleSponsor: Sponsor = {
