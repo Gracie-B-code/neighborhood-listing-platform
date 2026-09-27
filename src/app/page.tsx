@@ -3,7 +3,7 @@
 import { Property, Sponsor } from '@/types';
 import { PropertyCard } from '@/components/PropertyCard';
 import { SponsorBanner } from '@/components/SponsorBanner';
-import { SearchFilters } from '@/components/SearchFilters'; // Fixed import name (plural)
+import { SearchFilters } from '@/components/SearchFilter'; // Removed FilterState import
 
 const sampleSponsor: Sponsor = {
   id: 'sponsor-1',
@@ -58,6 +58,7 @@ export default function Home() {
         </p>
       </header>
 
+      {/* Inferred type handles parameter automatically */}
       <SearchFilters onFilterSubmit={(filters) => console.log('Filters applied:', filters)} />
 
       <SponsorBanner sponsor={sampleSponsor} />
