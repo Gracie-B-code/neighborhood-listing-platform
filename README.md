@@ -20,3 +20,12 @@ src/app/page.tsx (Page)
 =======
     └── PropertyCard (Article, Heading, Facts, Button/Link)
 
+Component Hierarchy
+===================
+src/app/page.tsx (Page)
+├── SearchFilters (Form, Labels, Select Controls, Submit)
+├── SponsorBanner (Sponsored Label, Accessible Link)
+└── Listing Grid (Tailwind: 1 col mobile, 2 md, 3 lg)
+    ├── PropertyCard (Article, Heading, Address, Price, Facts, Image)
+    ├── PropertyCard
+    └── PropertyCard
