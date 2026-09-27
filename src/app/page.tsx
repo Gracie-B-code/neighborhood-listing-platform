@@ -1,50 +1,72 @@
+'use client';
+
+import { Property, Sponsor } from '@/types';
+import { PropertyCard } from '@/components/PropertyCard';
+import { SponsorBanner } from '@/components/SponsorBanner';
+import { SearchFilters } from '@/components/SearchFilters';
+
+const sampleSponsor: Sponsor = {
+  id: 'sponsor-1',
+  name: 'Oakwood Community Bank',
+  tagline: 'Supporting local housing and community growth.',
+  websiteUrl: 'https://example.com/oakwood',
+};
+
+const sampleProperties: Property[] = [
+  {
+    id: 'prop-101',
+    title: 'Sunny Oakwood Apartment',
+    address: '124 Maple Street, Oakwood',
+    price: 1850,
+    bedrooms: 2,
+    bathrooms: 1,
+    squareFeet: 850,
+    imageUrl: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500',
+    imageAlt: 'Living room of a modern two-bedroom apartment with wood floors',
+  },
+  {
+    id: 'prop-102',
+    title: 'Spacious Family Home',
+    address: '458 Birch Lane, Oakwood',
+    price: 3200,
+    bedrooms: 4,
+    bathrooms: 2.5,
+    squareFeet: 2100,
+    imageUrl: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=500',
+    imageAlt: 'Two-story brick house with a green lawn and front yard',
+  },
+  {
+    id: 'prop-103',
+    title: 'Downtown Studio Condo',
+    address: '89 Main Street, Apt 4B',
+    price: 1400,
+    bedrooms: 1,
+    bathrooms: 1,
+    squareFeet: 550,
+    imageUrl: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500',
+    imageAlt: 'Compact studio apartment featuring large windows and modern lighting',
+  },
+];
+
 export default function Home() {
   return (
-    <main className="min-h-screen p-8 max-w-4xl mx-auto font-sans bg-gray-50 text-gray-900">
-      <header className="mb-8 border-b pb-4">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-950">
-          Neighborhood Listing Platform
-        </h1>
-        <p className="mt-2 text-gray-600 leading-relaxed">
-          Connecting local residents with neighborhood housing, trusted community sponsors, and voice-assisted help.
-        </p>
-      </header>
+    <main className="max-w-7xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-6">Neighborhood Listings</h1>
 
-      <section aria-labelledby="features-heading">
-        <h2 id="features-heading" className="sr-only">
-          Platform Features
+      <SearchFilters onFilterSubmit={(filters) => console.log(filters)} />
+
+      <SponsorBanner sponsor={sampleSponsor} />
+
+      {/* Responsive Grid: 1 col on small, 2 on medium, 3 on large */}
+      <section aria-labelledby="listings-heading">
+        <h2 id="listings-heading" className="text-2xl font-semibold mb-4">
+          Available Properties
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Listings */}
-          <article className="p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-white border-gray-200">
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">
-              Property Listings
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Browse verified local apartments, homes, and rental spaces in your neighborhood.
-            </p>
-          </article>
-
-          {/* Card 2: Sponsors */}
-          <article className="p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-white border-gray-200">
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">
-              Neighborhood Sponsors
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Discover local business partners supporting community growth and housing initiatives.
-            </p>
-          </article>
-
-          {/* Card 3: Voice Help */}
-          <article className="p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-white border-gray-200">
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">
-              Voice Help
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Access hands-free navigation and audio guidance for accessibility and ease of use.
-            </p>
-          </article>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sampleProperties.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))}
         </div>
       </section>
     </main>
