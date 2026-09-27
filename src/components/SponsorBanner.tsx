@@ -1,5 +1,5 @@
-import React from "react";
-import { Sponsor } from "../types";
+import React from 'react';
+import { Sponsor } from '@/types';
 
 interface SponsorBannerProps {
   sponsor: Sponsor;
@@ -15,7 +15,8 @@ export const SponsorBanner: React.FC<SponsorBannerProps> = ({ sponsor }) => {
         <h2 className="text-lg font-semibold text-gray-900 mt-2">
           {sponsor.name}
         </h2>
-        <p className="text-sm text-gray-700">{sponsor.description}</p>
+        {/* Changed sponsor.description to sponsor.tagline */}
+        <p className="text-sm text-gray-700">{sponsor.tagline}</p>
       </div>
       <a
         href={sponsor.websiteUrl}
