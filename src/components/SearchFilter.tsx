@@ -20,21 +20,32 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
       return;
     }
     setError(null);
-    
-    // Parse minPrice from string to number here
-    onFilterSubmit({ 
-      searchQuery: query, 
-      minPrice: Number(minPrice), 
-      propertyType 
+
+    onFilterSubmit({
+      searchQuery: query,
+      minPrice: Number(minPrice),
+      propertyType,
     });
   };
 
+  // Reusable focus ring utility ensuring crisp visibility across inputs & buttons
+  const inputFocusStyles =
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2';
+
   return (
-    <form onSubmit={handleSubmit} role="search" className="bg-gray-50 p-4 rounded-lg border mb-6">
+    <form
+      onSubmit={handleSubmit}
+      role="search"
+      aria-label="Neighborhood Property Search"
+      className="bg-gray-50 p-4 rounded-lg border mb-6"
+    >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         {/* Search Input */}
         <div>
-          <label htmlFor="search-input" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="search-input"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Search Neighborhood
           </label>
           <input
@@ -42,22 +53,26 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+            className={`w-full px-3 py-2 border rounded-md bg-white ${inputFocusStyles}`}
             aria-describedby={error ? 'search-error' : undefined}
             aria-invalid={!!error}
+            placeholder="e.g., Oakwood, Maple St"
           />
         </div>
 
         {/* Min Price Select */}
         <div>
-          <label htmlFor="price-select" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="price-select"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Minimum Rent
           </label>
           <select
             id="price-select"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+            className={`w-full px-3 py-2 border rounded-md bg-white ${inputFocusStyles}`}
           >
             <option value="0">Any Price</option>
             <option value="1000">$1,000 / month</option>
@@ -68,14 +83,17 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
 
         {/* Property Type Select */}
         <div>
-          <label htmlFor="type-select" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="type-select"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Property Type
           </label>
           <select
             id="type-select"
             value={propertyType}
             onChange={(e) => setPropertyType(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+            className={`w-full px-3 py-2 border rounded-md bg-white ${inputFocusStyles}`}
           >
             <option value="all">All Types</option>
             <option value="apartment">Apartment</option>
@@ -87,14 +105,18 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
 
       {/* Error Messaging */}
       {error && (
-        <p id="search-error" className="text-sm text-red-600 font-medium mb-3" role="alert">
+        <p
+          id="search-error"
+          className="text-sm text-red-600 font-medium mb-3"
+          role="alert"
+        >
           {error}
         </p>
       )}
 
       <button
         type="submit"
-        className="px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
+        className={`px-6 py-2 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 ${inputFocusStyles}`}
       >
         Apply Filters
       </button>
