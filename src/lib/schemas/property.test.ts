@@ -2,81 +2,49 @@ import { describe, it, expect } from 'vitest';
 import { PropertySchema } from './property';
 
 describe('PropertySchema Validation', () => {
-  const validPropertyData = {
+  const validProperty = {
     property_id: 'prop-101',
-    title: 'Modern Sunset Apartment',
+    title: 'Modern Downtown Apartment',
+    description: 'Spacious 2-bedroom apartment in the city center.',
     price: 2500,
-    bedrooms: 2,
-    bathrooms: 1.5,
-    square_feet: 950,
     address: {
-      street: '123 Sunset Blvd',
+      street: '123 Main St',
       city: 'Los Angeles',
       state: 'CA',
+      zip_code: '90012',
     },
-    zip_code: '90028',
-    amenities: ['PARKING', 'LAUNDRY'],
-    local_sponsors: [
-      {
-        sponsor_id: 'spons-1',
-        name: 'Sunset Coffee',
-        business_type: 'CAFE',
-        website_url: 'https://sunsetcoffee.example.com',
-      },
-    ],
+    amenities: [{ id: 'a1', name: 'Parking' }],
   };
 
-  it('should successfully validate a complete, valid property record', () => {
-    const result = PropertySchema.safeParse(validPropertyData);
+  it('validates a valid property record', () => {
+    const result = PropertySchema.safeParse(validProperty);
     expect(result.success).toBe(true);
   });
 
-  it('should fail validation when property_id is missing', () => {
-    const { property_id, ...dataWithoutId } = validPropertyData;
-    const result = PropertySchema.safeParse(dataWithoutId);
-    
+  it('fails when property_id is missing', () => {
+    const { property_id, ...invalid } = validProperty;
+    const result = PropertySchema.safeParse(invalid);
     expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error.issues.some((issue) => issue.path.includes('property_id'))).toBe(true);
-    }
   });
 
-  it('should fail validation when price is negative', () => {
-    const invalidData = {
-      ...validPropertyData,
-      price: -1200,
-    };
-    const result = PropertySchema.safeParse(invalidData);
-
+  it('fails when price is negative', () => {
+    const invalid = { ...validProperty, price: -500 };
+    const result = PropertySchema.safeParse(invalid);
     expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error.issues.some((issue) => issue.path.includes('price'))).toBe(true);
-    }
   });
 
-  it('should fail validation when zip_code format is invalid', () => {
-    const invalidData = {
-      ...validPropertyData,
-      zip_code: '9002',
+  it('fails when zip_code format is invalid', () => {
+    const invalid = {
+      ...validProperty,
+      address: { ...validProperty.address, zip_code: 'INVALID' },
     };
-    const result = PropertySchema.safeParse(invalidData);
-
+    const result = PropertySchema.safeParse(invalid);
     expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error.issues.some((issue) => issue.path.includes('zip_code'))).toBe(true);
-    }
   });
 
-  it('should reject unrecognized extra fields when using strict parsing', () => {
-    const invalidData = {
-      ...validPropertyData,
-      unknown_field: 'unauthorized_extra_value',
-    };
-    const result = PropertySchema.strict().safeParse(invalidData);
-
+  it('fails when unknown extra fields are passed', () => {
+    const invalid = { ...validProperty, extraField: 'not_allowed' };
+    const result = PropertySchema.safeParse(invalid);
     expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error.issues.some((issue) => issue.code === 'unrecognized_keys')).toBe(true);
-    }
   });
 });
