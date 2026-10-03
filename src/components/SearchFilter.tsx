@@ -28,7 +28,6 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
     });
   };
 
-  // Reusable focus ring utility ensuring crisp visibility across inputs & buttons
   const inputFocusStyles =
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2';
 
@@ -40,7 +39,6 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
       className="bg-gray-50 p-4 rounded-lg border mb-6"
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-        {/* Search Input */}
         <div>
           <label
             htmlFor="search-input"
@@ -60,7 +58,6 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
           />
         </div>
 
-        {/* Min Price Select */}
         <div>
           <label
             htmlFor="price-select"
@@ -81,7 +78,6 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
           </select>
         </div>
 
-        {/* Property Type Select */}
         <div>
           <label
             htmlFor="type-select"
@@ -103,7 +99,6 @@ export const SearchFilters = ({ onFilterSubmit }: SearchFiltersProps) => {
         </div>
       </div>
 
-      {/* Error Messaging */}
       {error && (
         <p
           id="search-error"
