@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PropertyListing",
+  "type": "object",
+  "required": [
+    "property_id",
+    "title",
+    "address",
+    "zip_code",
+    "price",
+    "bedrooms",
+    "bathrooms",
+    "square_feet",
+    "amenities",
+    "local_sponsors"
+  ],
+  "properties": {
+    "property_id": {
+      "type": "string",
+      "pattern": "^prop-[a-z0-9-]+$",
+      "minLength": 5
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "address": {
+      "type": "object",
+      "required": ["street", "city", "state"],
+      "properties": {
+        "street": { "type": "string", "minLength": 3 },
+        "city": { "type": "string", "minLength": 2 },
+        "state": { "type": "string", "pattern": "^[A-Z]{2}$" }
+      },
+      "additionalProperties": false
+    },
+    "zip_code": {
+      "type": "string",
+      "pattern": "^[0-9]{5}(-[0-9]{4})?$"
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0
+    },
+    "bedrooms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "bathrooms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "square_feet": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "amenities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "In-Unit Laundry",
+          "Parking Spot",
+          "Pet Friendly",
+          "Central AC",
+          "Balcony",
+          "Pool",
+          "Fitness Center",
+          "EV Charging"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "local_sponsors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sponsor_id", "name", "business_type"],
+        "properties": {
+          "sponsor_id": { "type": "string", "minLength": 3 },
+          "name": { "type": "string", "minLength": 2 },
+          "business_type": {
+            "type": "string",
+            "enum": [
+              "Local Bakery",
+              "Coffee Shop",
+              "Gym / Fitness",
+              "Moving Company",
+              "Insurance Agent"
+            ]
+          },
+          "website_url": { "type": "string", "format": "uri" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
