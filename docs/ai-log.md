@@ -20,3 +20,15 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ChatGPT & Gemini** | Explain Next.js App Router vs Pages Router and Tailwind CSS for plain-language comparison. | Plain language breakdown of server/client components and utility-first styling. | Overly complex microservices architecture proposals. | Verified local conceptual understanding against project requirements. | `(Initial setup)` |
 | **Google AI Studio** ("App Shell Architect") | Scaffold file structure and initial React/Tailwind app shell with accessible cards for listings, sponsors, and voice help. | Semantic HTML structure (`<main>`, `<section>`, `<article>`), Tailwind grid layout, and accessible headings. | Non-semantic `<div>` soup without ARIA labeling or responsive grid rules. | `npm run lint` and `npm run build` passed with zero errors. | `feat: initialize Next.js app shell with feature cards and AI log` |
+
+---
+
+## Stakeholder Discovery Package (2026-11-02)
+
+See [discovery-package.md](./discovery-package.md). The package is a planning draft based on the project brief and current landing-page copy; no stakeholder interview, outreach, or approval is claimed.
+
+| Tool | Prompt | Output used | Output rejected / pending | Verification | Commit |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **ChatGPT** | “Using only the project description and repository facts provided, draft neutral discovery questions for property professionals and local sponsors. Separate known facts from assumptions. Do not invent interview findings; identify what needs stakeholder confirmation.” | Neutral question topics and separation of interface copy from verified evidence. | Unsupported claims about stakeholder needs, implemented features, and success metrics. | Compared against the assignment topics and repository landing-page copy; no interview evidence was supplied. | Pending |
+| **Gemini** | “Review this de-identified discovery guide for leading, double-barreled, or privacy-invasive questions. Suggest neutral alternatives. Do not infer stakeholder preferences.” | Pending; review has not been run. | No output claimed. | Pending. | Pending |
+| **Google AI Studio** | “Convert these de-identified interview notes into themes, uncertainties, and candidate requirements. Quote no more than necessary. Mark every inference as an inference and list questions that require stakeholder confirmation.” | Pending; no source notes exist yet. | No output claimed. | Pending notes and line-by-line comparison. | Pending |

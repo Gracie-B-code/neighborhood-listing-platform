@@ -1,0 +1,101 @@
+{
+  "label": "SYNTHETIC LOCAL EXAMPLES — not AI Studio output and not real listings",
+  "generated_by": "Locally authored test fixtures",
+  "records": [
+    {
+      "property_id": "11111111-1111-4111-8111-111111111111",
+      "street_address": "100 Example Lane",
+      "city": "Sampleton",
+      "state": "CA",
+      "zip_code": "90001",
+      "price": 480000,
+      "price_basis": "purchase",
+      "currency": "USD",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "square_feet": 1450,
+      "amenities": ["parking", "laundry"],
+      "local_sponsors": [
+        {
+          "sponsor_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "name": "Fictional Oak Market"
+        }
+      ]
+    },
+    {
+      "property_id": "22222222-2222-4222-8222-222222222222",
+      "street_address": "22 Demo Street",
+      "address_line_2": "Unit 4",
+      "city": "Sampleton",
+      "state": "CA",
+      "zip_code": "90002-1234",
+      "price": 2100,
+      "price_basis": "monthly_rent",
+      "currency": "USD",
+      "bedrooms": 2,
+      "bathrooms": 1.5,
+      "square_feet": 980,
+      "amenities": ["air_conditioning", "pets_allowed"],
+      "local_sponsors": []
+    },
+    {
+      "property_id": "33333333-3333-4333-8333-333333333333",
+      "street_address": "3 Placeholder Court",
+      "city": "Fictional Bay",
+      "state": "OR",
+      "zip_code": "97035",
+      "price": 0,
+      "price_basis": "other",
+      "currency": "USD",
+      "bedrooms": 0,
+      "bathrooms": 1,
+      "square_feet": 420,
+      "amenities": ["pool"],
+      "local_sponsors": [
+        {
+          "sponsor_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "name": "Imaginary Garden Co-op"
+        }
+      ]
+    },
+    {
+      "property_id": "44444444-4444-4444-8444-444444444444",
+      "street_address": "400 Model Avenue",
+      "city": "Fictional Bay",
+      "state": "OR",
+      "zip_code": "97036",
+      "price": 1750,
+      "price_basis": "monthly_rent",
+      "currency": "USD",
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "square_feet": 860,
+      "amenities": ["balcony", "dishwasher"],
+      "local_sponsors": []
+    },
+    {
+      "property_id": "55555555-5555-4555-8555-555555555555",
+      "street_address": "55 Mockingbird Way",
+      "city": "Example Heights",
+      "state": "WA",
+      "zip_code": "98001",
+      "price": 725000,
+      "price_basis": "purchase",
+      "currency": "USD",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "square_feet": 2200,
+      "amenities": ["gym", "yard"],
+      "local_sponsors": [
+        {
+          "sponsor_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+          "name": "Fictional Oak Market"
+        },
+        {
+          "sponsor_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+          "name": "Imaginary Garden Co-op"
+        }
+      ]
+    }
+  ]
+}

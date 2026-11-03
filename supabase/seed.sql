@@ -1,0 +1,133 @@
+-- Synthetic local-development identities only; these users have no usable password.
+insert into auth.users (
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  created_at,
+  updated_at
+)
+values
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '10000000-0000-4000-8000-000000000001',
+    'authenticated',
+    'authenticated',
+    'synthetic-owner@example.invalid',
+    null,
+    now(),
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"display_name":"Synthetic Property Owner"}'::jsonb,
+    now(),
+    now()
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '20000000-0000-4000-8000-000000000002',
+    'authenticated',
+    'authenticated',
+    'synthetic-sponsor@example.invalid',
+    null,
+    now(),
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"display_name":"Synthetic Sponsor Owner"}'::jsonb,
+    now(),
+    now()
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '30000000-0000-4000-8000-000000000003',
+    'authenticated',
+    'authenticated',
+    'synthetic-admin@example.invalid',
+    null,
+    now(),
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"display_name":"Synthetic Local Admin"}'::jsonb,
+    now(),
+    now()
+  )
+on conflict (id) do nothing;
+
+update public.profiles
+set role = 'admin'
+where id = '30000000-0000-4000-8000-000000000003';
+
+insert into public.properties (
+  id, owner_id, street_address, city, state, zip_code, price, price_basis,
+  currency, bedrooms, bathrooms, square_feet, amenities, status, approved_at
+)
+values
+  (
+    '11111111-1111-4111-8111-111111111111',
+    '10000000-0000-4000-8000-000000000001',
+    '100 Example Lane', 'Sampleton', 'CA', '90001', 480000, 'purchase',
+    'USD', 3, 2, 1450, array['parking', 'laundry'], 'approved', now()
+  ),
+  (
+    '22222222-2222-4222-8222-222222222222',
+    '10000000-0000-4000-8000-000000000001',
+    '22 Demo Street', 'Sampleton', 'CA', '90002', 2100, 'monthly_rent',
+    'USD', 2, 1.5, 980, array['air_conditioning'], 'pending', null
+  ),
+  (
+    '33333333-3333-4333-8333-333333333333',
+    '20000000-0000-4000-8000-000000000002',
+    '3 Placeholder Court', 'Fictional Bay', 'OR', '97035', 0, 'other',
+    'USD', 0, 1, 420, array['pool'], 'pending', null
+  )
+on conflict (id) do nothing;
+
+insert into public.sponsors (
+  id, owner_id, name, category, website_url, claims, status, active_at
+)
+values
+  (
+    'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+    '20000000-0000-4000-8000-000000000002',
+    'Fictional Oak Market', 'Grocery',
+    'https://oak-market.example.invalid',
+    array['Synthetic sponsor example'], 'active', now()
+  ),
+  (
+    'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
+    '20000000-0000-4000-8000-000000000002',
+    'Imaginary Garden Co-op', 'Community',
+    'https://garden-coop.example.invalid',
+    array['Synthetic sponsor example'], 'active', now()
+  ),
+  (
+    'cccccccc-cccc-4ccc-8ccc-cccccccccccc',
+    '20000000-0000-4000-8000-000000000002',
+    'Unreviewed Demo Sponsor', 'Community',
+    null, array[]::text[], 'pending', null
+  )
+on conflict (id) do nothing;
+
+insert into public.property_sponsors (property_id, sponsor_id, created_by, status, reviewed_at)
+values (
+  '11111111-1111-4111-8111-111111111111',
+  'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
+  '10000000-0000-4000-8000-000000000001',
+  'approved',
+  now()
+)
+on conflict (property_id, sponsor_id) do nothing;
+
+insert into public.inquiries (
+  id, property_id, user_id, contact_name, email, message
+)
+values (
+  'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee',
+  '33333333-3333-4333-8333-333333333333',
+  '20000000-0000-4000-8000-000000000002',
+  'Synthetic Inquiry Sender',
+  'inquiry@example.invalid',
+  'Synthetic inquiry used only for local authorization tests.'
+)
+on conflict (id) do nothing;
