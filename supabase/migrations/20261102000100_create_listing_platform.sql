@@ -296,9 +296,9 @@ begin
     raise exception 'Authentication required' using errcode = '42501';
   end if;
 
-  if jsonb_typeof(p_input) <> 'object'
+  if jsonb_typeof(p_input) is distinct from 'object'
     or not (p_input ?& array[
-      'street_address', 'address_line_2', 'city', 'state', 'zip_code',
+      'street_address', 'city', 'state', 'zip_code',
       'price', 'price_basis', 'currency', 'bedrooms', 'bathrooms',
       'square_feet', 'amenities', 'local_sponsors'
     ])

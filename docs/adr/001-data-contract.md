@@ -23,6 +23,7 @@ Amenities use a controlled enumeration (`air_conditioning`, `balcony`, `dishwash
 - `profiles.id` is a one-to-one role/display profile for `auth.users`; ordinary users may not write the role column.
 - `inquiries` references both a property and its authenticated author.
 - Address components and property measurements are stored as columns for validation and filtering. Amenities are a controlled `text[]`; a separate amenity join table is not warranted for this small MVP.
+- `address_line_2` is optional in the create contract and nullable in storage; the database RPC accepts its omission and stores it as `NULL`.
 - Sponsor names and claims are stored once in `sponsors`; the property contract projects sponsor references from the join rather than duplicating sponsor content.
 - Revision tables retain the last approved snapshot when a material owner edit sends a published property or sponsor back to review.
 

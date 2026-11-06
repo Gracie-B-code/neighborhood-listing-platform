@@ -1,6 +1,6 @@
 begin;
 
-select plan(15);
+select plan(16);
 
 set local role anon;
 select set_config('request.jwt.claim.role', 'anon', true);
@@ -80,6 +80,25 @@ select throws_ok(
   null,
   'member cannot assign themselves administrator role'
 );
+select ok(
+  public.create_property_with_sponsors(
+    '{
+      "street_address": "5 Optional Lane",
+      "city": "Sampleton",
+      "state": "CA",
+      "zip_code": "90003",
+      "price": 100,
+      "price_basis": "purchase",
+      "currency": "USD",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "square_feet": 500,
+      "amenities": [],
+      "local_sponsors": []
+    }'::jsonb
+  ) is not null,
+  'property submission accepts omitted optional address_line_2'
+);
 reset role;
 
 set local role authenticated;
@@ -112,7 +131,7 @@ select set_config(
 );
 select is(
   (select count(id)::integer from public.properties),
-  3,
+  4,
   'administrator can read all properties through the admin policy'
 );
 reset role;

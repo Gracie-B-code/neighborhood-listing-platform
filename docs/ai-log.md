@@ -23,6 +23,16 @@
 
 ---
 
+## Current Lab 3–5 implementation session
+
+The earlier entries above are preserved as historical project records and were not independently verified during this session.
+
+| Tool/model | Prompt summary | Output used | Output rejected or pending | Verification | Commit |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Copilot SDK in VS Code (model identity not surfaced) | Audit the current repository against the supplied Labs 3–5 requirements, preserve prior work and attribution, implement missing local work, and do not invent external evidence. | Reused the existing Lab 3–5 implementation on this repository's `origin/exam/services-booking-eval` branch; corrected the optional `address_line_2` mismatch between the Zod create input and database RPC, and added regression checks. | No other repository was used. No AI Studio, Gemini, participant, partner, or instructor output is claimed; those activities remain pending. | `npm test` passed (6 tests); `npm run lint`, `npm run typecheck`, and `npm run build` passed. Docker Desktop was installed per-user from Docker's signed official installer. Local `supabase db reset` succeeded; `supabase test db` passed all 16 tests. With local configuration, `GET /api/properties` returned HTTP 200 and one approved synthetic record; the home page returned HTTP 200. The earlier unconfigured 503 check was a separate run. | None; changes remain uncommitted on `feature/database`. |
+
+---
+
 ## Stakeholder Discovery Package (2026-11-02)
 
 See [discovery-package.md](./discovery-package.md). The package is a planning draft based on the project brief and current landing-page copy; no stakeholder interview, outreach, or approval is claimed.

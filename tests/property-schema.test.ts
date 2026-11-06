@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { PropertyRecordListSchema, PropertyRecordSchema } from "../src/lib/properties/schema";
+import {
+  CreatePropertyInputSchema,
+  PropertyRecordListSchema,
+  PropertyRecordSchema,
+} from "../src/lib/properties/schema";
 
 const fixture = JSON.parse(
   readFileSync(new URL("../data/generated/synthetic-property-examples.json", import.meta.url), "utf8"),
@@ -14,6 +18,18 @@ test("accepts each locally authored synthetic property fixture", () => {
   assert.equal(result.success, true);
   if (result.success) {
     assert.equal(result.data.length, 5);
+  }
+});
+
+test("accepts a create input without the optional address line or sponsor IDs", () => {
+  const input = { ...(validRecord as Record<string, unknown>) };
+  delete input.property_id;
+  delete input.local_sponsors;
+  const result = CreatePropertyInputSchema.safeParse(input);
+
+  assert.equal(result.success, true);
+  if (result.success) {
+    assert.deepEqual(result.data.local_sponsors, []);
   }
 });
 

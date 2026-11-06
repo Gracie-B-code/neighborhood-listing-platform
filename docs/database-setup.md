@@ -2,32 +2,39 @@
 
 ## Status and scope
 
-The migration, local-only synthetic seed, RLS policy tests, and server routes are prepared. No Supabase project credentials or local database service were available, so migration execution and authorization tests have **not** been run. This repository does not include credentials. No secrets should be added to Git or shared in chat.
+The local Supabase stack is running for this workspace. `supabase db reset` applied the numbered migration and local-only synthetic seed successfully, and `supabase test db` passed all 16 RLS assertions. The app's `GET /api/properties` returned HTTP 200 with one approved synthetic listing. Local values are in ignored `.env.local`; no database credentials are committed or recorded here.
+
+The optional `supabase_vector` container was restarting during the final status check. The database, REST API, and tested property workflow were available; vector functionality is not used by this lab's schema or routes.
 
 Run the seed only against a disposable local Supabase development database. It creates fictional `auth.users` identities, including a test administrator, with no usable password. Do not apply `supabase/seed.sql` to a hosted project.
 
 ## Clean local rebuild
 
-1. Install the Supabase CLI and Docker using the official instructions for your operating system.
+1. Install Docker Desktop and the Supabase CLI using their official instructions. For this per-user Docker Desktop installation, add its CLI to the current PowerShell session:
+
+   ```powershell
+   $env:PATH = "$env:LOCALAPPDATA\Programs\DockerDesktop\resources\bin;$env:PATH"
+   ```
+
 2. From the repository root, start the local stack:
 
    ```powershell
-   supabase start
+   npx.cmd --yes supabase start
    ```
 
 3. Reset the disposable database. This applies the numbered migration and local seed:
 
    ```powershell
-   supabase db reset
+   npx.cmd --yes supabase db reset
    ```
 
 4. Run the row-level-security tests:
 
    ```powershell
-   supabase test db
+   npx.cmd --yes supabase test db
    ```
 
-5. Copy `.env.example` to `.env.local`. Obtain the local API URL, anon key, and service-role key from `supabase status`; copy them directly into the ignored local file and do not paste them into logs, issues, or chat.
+5. Copy `.env.example` to `.env.local`. Obtain the local API URL, anon key, and service-role key from `npx.cmd --yes supabase status`; that command prints local credentials, so copy them directly into the ignored local file and never share its full output in logs, issues, or chat.
 6. Start the application:
 
    ```powershell
@@ -71,10 +78,7 @@ Admin approvals follow a separate path: verified user JWT → server-side `profi
 - Inquiries require authentication; table-level RLS prevents anonymous reads. Only the author, associated property owner, or admin can read the message/contact fields.
 - The migration includes `properties`, `sponsors`, `property_sponsors`, `profiles`, `inquiries`, and private revision tables. The seed contains fictional records only.
 
-## Pending live checks
+## Remaining checks
 
-- Run migration and seed against a clean local Supabase instance.
-- Confirm auth fixture insertion is compatible with the installed Supabase local version.
-- Run all pgTAP RLS assertions and resolve any policy/privilege mismatches.
-- Configure a disposable local auth session and verify GET/POST/admin routes end-to-end.
+- Configure disposable local auth sessions and verify POST and admin routes end-to-end under the intended identities.
 - Review RLS and SQL with a peer/instructor; do not treat local test seed admin as production authorization.
