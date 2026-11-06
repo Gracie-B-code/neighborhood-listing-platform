@@ -6,6 +6,10 @@ The local Supabase stack is running for this workspace. `supabase db reset` appl
 
 The optional `supabase_vector` container was restarting during the final status check. The database, REST API, and tested property workflow were available; vector functionality is not used by this lab's schema or routes.
 
+## Separate services/bookings exercise
+
+The exam services subsystem is separate from the Properties/Sponsors Labs 3–5 model above. Its numbered migration is `20261029140000_exam_services_persistence.sql`; it creates `service_profiles`, `services`, and `service_bookings` with independent role and RLS policies. `src/app/api/services/route.ts` uses the session-scoped server client, so normal reads and provider inserts remain subject to RLS. See [the services authorization audit](./security-audit.md) for role-by-role test evidence. The latest local run passed all 20 services-specific RLS assertions.
+
 Run the seed only against a disposable local Supabase development database. It creates fictional `auth.users` identities, including a test administrator, with no usable password. Do not apply `supabase/seed.sql` to a hosted project.
 
 ## Clean local rebuild

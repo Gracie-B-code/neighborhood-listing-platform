@@ -51,12 +51,75 @@ values
     '{"display_name":"Synthetic Local Admin"}'::jsonb,
     now(),
     now()
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '40000000-0000-4000-8000-000000000004',
+    'authenticated',
+    'authenticated',
+    'synthetic-provider-two@example.invalid',
+    null,
+    now(),
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"display_name":"Synthetic Second Provider"}'::jsonb,
+    now(),
+    now()
+  ),
+  (
+    '00000000-0000-0000-0000-000000000000',
+    '50000000-0000-4000-8000-000000000005',
+    'authenticated',
+    'authenticated',
+    'synthetic-client-two@example.invalid',
+    null,
+    now(),
+    '{"provider":"email","providers":["email"]}'::jsonb,
+    '{"display_name":"Synthetic Second Client"}'::jsonb,
+    now(),
+    now()
   )
 on conflict (id) do nothing;
 
 update public.profiles
 set role = 'admin'
 where id = '30000000-0000-4000-8000-000000000003';
+
+insert into public.service_profiles (id, role)
+values
+  ('10000000-0000-4000-8000-000000000001', 'provider'),
+  ('20000000-0000-4000-8000-000000000002', 'client'),
+  ('30000000-0000-4000-8000-000000000003', 'admin'),
+  ('40000000-0000-4000-8000-000000000004', 'provider'),
+  ('50000000-0000-4000-8000-000000000005', 'client')
+on conflict (id) do update set role = excluded.role;
+
+insert into public.services (
+  id, provider_id, title, description, category, city, state, zip_code,
+  rate_amount, currency, rate_unit, status
+)
+values
+  (
+    'dddddddd-dddd-4ddd-8ddd-dddddddddddd',
+    '10000000-0000-4000-8000-000000000001',
+    'Fictional home repair',
+    'Synthetic approved service used for local API and authorization tests.',
+    'home_repair', 'Sampleton', 'CA', '90001', 75, 'USD', 'hour', 'approved'
+  ),
+  (
+    'eeeeeeee-eeee-4eee-8eee-eeeeeeeeee01',
+    '10000000-0000-4000-8000-000000000001',
+    'Synthetic provider draft',
+    'Synthetic pending service owned by the first fictional provider.',
+    'cleaning', 'Sampleton', 'CA', '90002', null, 'USD', 'visit', 'pending'
+  ),
+  (
+    'eeeeeeee-eeee-4eee-8eee-eeeeeeeeee02',
+    '40000000-0000-4000-8000-000000000004',
+    'Synthetic second provider draft',
+    'Synthetic pending service owned by a different fictional provider.',
+    'tutoring', 'Sampleton', 'CA', '90003', 40, 'USD', 'hour', 'pending'
+  )
+on conflict (id) do nothing;
 
 insert into public.properties (
   id, owner_id, street_address, city, state, zip_code, price, price_basis,
