@@ -1,6 +1,6 @@
 begin;
 
-select plan(16);
+select plan(22);
 
 set local role anon;
 select set_config('request.jwt.claim.role', 'anon', true);
@@ -99,6 +99,29 @@ select ok(
   ) is not null,
   'property submission accepts omitted optional address_line_2'
 );
+update public.properties
+set street_address = '100 Revised Example Lane'
+where id = '11111111-1111-4111-8111-111111111111';
+select is(
+  (select status from public.properties where id = '11111111-1111-4111-8111-111111111111'),
+  'pending',
+  'editing an approved property returns it to review'
+);
+reset role;
+
+set local role service_role;
+select is(
+  (select count(*)::integer from public.property_revisions
+   where property_id = '11111111-1111-4111-8111-111111111111'),
+  1,
+  'approved property edit stores one private revision'
+);
+select is(
+  (select approved_snapshot ->> 'street_address' from public.property_revisions
+   where property_id = '11111111-1111-4111-8111-111111111111'),
+  '100 Example Lane',
+  'property revision preserves the prior approved address'
+);
 reset role;
 
 set local role authenticated;
@@ -118,6 +141,29 @@ select is(
   (select count(id)::integer from public.inquiries where id = 'eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee'),
   1,
   'inquiry author can read their own inquiry'
+);
+update public.sponsors
+set name = 'Revised Fictional Oak Market'
+where id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
+select is(
+  (select status from public.sponsors where id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),
+  'pending',
+  'editing an active sponsor returns it to review'
+);
+reset role;
+
+set local role service_role;
+select is(
+  (select count(*)::integer from public.sponsor_revisions
+   where sponsor_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),
+  1,
+  'active sponsor edit stores one private revision'
+);
+select is(
+  (select approved_snapshot ->> 'name' from public.sponsor_revisions
+   where sponsor_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),
+  'Fictional Oak Market',
+  'sponsor revision preserves the prior approved name'
 );
 reset role;
 

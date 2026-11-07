@@ -9,7 +9,7 @@ The migration enables RLS on `service_profiles`, `services`, and `service_bookin
 ### Verification status
 
 - `npx.cmd --yes supabase db reset` applied both the services migration and fictional seed successfully on the local Supabase stack.
-- `npx.cmd --yes supabase test db` passed both pgTAP files: 36 total assertions (16 property/sponsor and 20 services/bookings).
+- `npx.cmd --yes supabase test db` passed both pgTAP files: 42 total assertions (22 property/sponsor and 20 services/bookings).
 - `GET /api/services` returned HTTP 200 with one approved synthetic service.
 - Invalid `POST /api/services` returned HTTP 400, and unauthenticated `POST` returned HTTP 401.
 - Authenticated local provider `POST /api/services` returned HTTP 201 and a pending record. The temporary test identity and its service were removed afterward.

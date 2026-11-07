@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-The local Supabase stack is running for this workspace. `supabase db reset` applied the numbered migration and local-only synthetic seed successfully, and `supabase test db` passed all 16 RLS assertions. The app's `GET /api/properties` returned HTTP 200 with one approved synthetic listing. Local values are in ignored `.env.local`; no database credentials are committed or recorded here.
+The local Supabase stack is running for this workspace. `supabase db reset` applied the numbered migration and local-only synthetic seed successfully, and `supabase test db` passed all 22 property/sponsor and 20 services/bookings RLS assertions. The property/sponsor tests include approved-content revision capture when owners edit published records. The app's `GET /api/properties` returned HTTP 200 with one approved synthetic listing. Local values are in ignored `.env.local`; no database credentials are committed or recorded here.
 
 The optional `supabase_vector` container was restarting during the final status check. The database, REST API, and tested property workflow were available; vector functionality is not used by this lab's schema or routes.
 
@@ -65,7 +65,7 @@ To rebuild from a clean database, repeat `supabase db reset`. The migration is t
 | Different authenticated user | Read public content | Own records only | Denied | Denied |
 | Administrator | Read through trusted admin API after server-side profile-role check | Trusted review routes may approve/return | Trusted review routes may approve/return | Only server-verified admin route with service-role key; never client-controlled role metadata |
 
-`supabase/tests/rls.test.sql` exercises anonymous read/write rules, owner read/update, cross-owner denial, immutable ownership and role, inquiry privacy, admin visibility, and a trusted service-role approval operation. The service-role case alone is not proof of RLS; run the full suite with the anonymous/authenticated roles in the local database before claiming verification.
+`supabase/tests/rls.test.sql` exercises anonymous read/write rules, owner read/update, cross-owner denial, immutable ownership and role, inquiry privacy, admin visibility, approved property/sponsor revision capture, and a trusted service-role approval operation. The service-role cases alone are not proof of RLS; run the full suite with the anonymous/authenticated roles in the local database before claiming verification.
 
 ## Data flow
 
