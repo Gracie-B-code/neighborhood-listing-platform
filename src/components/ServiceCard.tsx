@@ -32,7 +32,7 @@ export function ServiceCard({ service, onRequestService }: ServiceCardProps) {
       <p className="text-sm font-semibold uppercase tracking-wide text-teal-800">
         {service.category.replaceAll("_", " ")}
       </p>
-      <h2 className="mt-2 text-xl font-bold text-slate-900">{service.title}</h2>
+      <h3 className="mt-2 text-xl font-bold text-slate-900">{service.title}</h3>
       <p className="mt-2 flex-1 text-sm leading-6 text-slate-700">
         {service.description}
       </p>

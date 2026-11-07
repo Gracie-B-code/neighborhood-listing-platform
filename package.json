@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "tsx --test tests/property-schema.test.ts tests/service-schema.test.ts"
+    "test": "tsx --test tests/property-schema.test.ts tests/property-filters.test.ts tests/service-schema.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

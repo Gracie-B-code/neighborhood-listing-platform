@@ -1,5 +1,6 @@
 import ListingsExplorer from "./listings-explorer";
 import ServicesExplorer from "./services-explorer";
+import SponsorsExplorer from "./sponsors-explorer";
 
 export default function Home() {
   return (
@@ -28,14 +29,15 @@ export default function Home() {
           <ServicesExplorer />
         </section>
 
+        <section aria-labelledby="sponsors-heading" className="mb-12">
+          <h2 id="sponsors-heading" className="mb-5 text-2xl font-bold">
+            Neighborhood sponsors
+          </h2>
+          <SponsorsExplorer />
+        </section>
+
         <section aria-label="More platform concepts">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-slate-800">Neighborhood Sponsors</h2>
-              <p className="mt-2 text-sm text-slate-600">
-                Sponsor content is shown only after review and is clearly identified.
-              </p>
-            </article>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="text-xl font-bold text-slate-800">Voice Help</h2>
               <p className="mt-2 text-sm text-slate-600">
