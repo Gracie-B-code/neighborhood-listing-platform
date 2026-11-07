@@ -2,8 +2,9 @@
 
 Connecting local residents, businesses, and essential services in one community hub.
 
-## 🚀 Live Demo
-- **Production URL:** [https://neighborhood-listing-platform-sigma.vercel.app](https://neighborhood-listing-platform-sigma.vercel.app)
+## Deployment
+
+There is no verified Vercel deployment link yet. Add the preview or production URL here after a deployment succeeds.
 
 ## Tech Stack
 - **Framework:** Next.js (App Router)
