@@ -4,8 +4,9 @@ Connecting local residents, businesses, and essential services in one community 
 
 ## Deployment
 
-- **Branch preview:** [https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app](https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app) (`exam/services-booking-eval`; Vercel account access required).
-- The Vercel demo can use `DEMO_MODE=true` to serve the same fictional seed listings without exposing the Docker database. This mode is read-only; authenticated submissions and service requests remain disabled.
+- **Production:** [https://neighborhood-listing-platform-umber.vercel.app](https://neighborhood-listing-platform-umber.vercel.app). Vercel production branch tracking is set to `exam/services-booking-eval`; this does not merge the branch into GitHub `main`.
+- **Branch preview:** [https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app](https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app).
+- Set `DEMO_MODE=true` in Vercel Production and Preview to serve the same fictional records as the local seed. Demo mode is read-only; authenticated submissions and service requests remain disabled. Local Docker Supabase credentials are not used in Vercel.
 - Local development uses Docker Supabase with `DEMO_MODE=false` (the default) and the local environment values in `.env.local`.
 
 ## Tech Stack
