@@ -1,4 +1,5 @@
 import ListingsExplorer from "./listings-explorer";
+import ServicesExplorer from "./services-explorer";
 
 export default function Home() {
   return (
@@ -15,9 +16,16 @@ export default function Home() {
 
         <section aria-labelledby="listings-heading" className="mb-12">
           <h2 id="listings-heading" className="mb-5 text-2xl font-bold">
-            Approved local listings
+            Approved property listings
           </h2>
           <ListingsExplorer />
+        </section>
+
+        <section aria-labelledby="services-heading" className="mb-12">
+          <h2 id="services-heading" className="mb-5 text-2xl font-bold">
+            Local services
+          </h2>
+          <ServicesExplorer />
         </section>
 
         <section aria-label="More platform concepts">

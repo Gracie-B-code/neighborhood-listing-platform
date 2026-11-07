@@ -38,5 +38,18 @@ export const ServiceRecordListSchema = z.array(ServiceRecordSchema).max(500);
 
 export const CreateServiceInputSchema = z.object(ServiceFields).strict();
 
+export const CreateServiceBookingInputSchema = z.object({
+  service_id: z.string().uuid(),
+}).strict();
+
+export const ServiceBookingRecordSchema = z.object({
+  id: z.string().uuid(),
+  service_id: z.string().uuid(),
+  status: z.enum(["requested", "accepted", "declined", "cancelled"]),
+  requested_at: z.iso.datetime({ offset: true }),
+  created_at: z.iso.datetime({ offset: true }),
+}).strict();
+
 export type ServiceRecord = z.infer<typeof ServiceRecordSchema>;
 export type CreateServiceInput = z.infer<typeof CreateServiceInputSchema>;
+export type ServiceBookingRecord = z.infer<typeof ServiceBookingRecordSchema>;

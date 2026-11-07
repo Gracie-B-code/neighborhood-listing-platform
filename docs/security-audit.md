@@ -13,6 +13,7 @@ The migration enables RLS on `service_profiles`, `services`, and `service_bookin
 - `GET /api/services` returned HTTP 200 with one approved synthetic service.
 - Invalid `POST /api/services` returned HTTP 400, and unauthenticated `POST` returned HTTP 401.
 - Authenticated local provider `POST /api/services` returned HTTP 201 and a pending record. The temporary test identity and its service were removed afterward.
+- Authenticated local client `POST /api/services/{serviceId}/bookings` returned HTTP 201 with a requested booking. The temporary client identity and associated booking were removed afterward.
 - Authenticated route verification used the same user-scoped server client and RLS policies; no service-role API client was used for the request.
 
 ## Authorization matrix
@@ -36,6 +37,6 @@ The pgTAP script verifies:
 - An administrator can read all services/bookings and approve a service.
 - An administrator cannot assign a role through an ordinary client update.
 
-The route uses the user-scoped server client, validates input with Zod, and relies on the same database RLS rules. Local HTTP checks verified an approved GET, invalid and anonymous denials, and a successful authenticated provider POST. A full browser/manual usability check remains separate.
+The services and booking routes use the user-scoped server client and rely on the same database RLS rules. Local HTTP checks verified an approved GET, invalid and anonymous denials, and successful authenticated provider and client requests. A full browser/manual usability check remains separate.
 
 All created and updated times use PostgreSQL `timestamptz` columns with `now()` defaults/triggers. PostgreSQL stores these as absolute instants independently of client time zone; API timestamps retain their timezone offset.
