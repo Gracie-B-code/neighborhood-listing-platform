@@ -4,7 +4,7 @@ Connecting local residents, businesses, and essential services in one community 
 
 ## Deployment
 
-- **Branch preview:** [https://neighborhood-listing-platform-qo7mtnkox-dev-a365.vercel.app](https://neighborhood-listing-platform-qo7mtnkox-dev-a365.vercel.app) (`exam/services-booking-eval`; Vercel account access required).
+- **Branch preview:** [https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app](https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app) (`exam/services-booking-eval`; Vercel account access required).
 - This preview currently renders the page, but its property, service, and sponsor APIs need hosted Supabase environment variables before dynamic listing data will load. It is not the production deployment.
 
 ## Tech Stack
