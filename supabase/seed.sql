@@ -143,6 +143,18 @@ values
     '20000000-0000-4000-8000-000000000002',
     '3 Placeholder Court', 'Fictional Bay', 'OR', '97035', 0, 'other',
     'USD', 0, 1, 420, array['pool'], 'pending', null
+  ),
+  (
+    '44444444-4444-4444-8444-444444444444',
+    '10000000-0000-4000-8000-000000000001',
+    '400 Model Avenue', 'Fictional Bay', 'OR', '97036', 1750, 'monthly_rent',
+    'USD', 2, 1, 860, array['balcony', 'dishwasher'], 'approved', now()
+  ),
+  (
+    '55555555-5555-4555-8555-555555555555',
+    '10000000-0000-4000-8000-000000000001',
+    '55 Mockingbird Way', 'Example Heights', 'WA', '98001', 725000, 'purchase',
+    'USD', 4, 3, 2200, array['gym', 'yard'], 'approved', now()
   )
 on conflict (id) do nothing;
 

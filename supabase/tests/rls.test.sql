@@ -6,7 +6,7 @@ set local role anon;
 select set_config('request.jwt.claim.role', 'anon', true);
 select is(
   (select count(id)::integer from public.properties),
-  1,
+  3,
   'anonymous users see approved properties only'
 );
 select is(
@@ -131,7 +131,7 @@ select set_config(
 );
 select is(
   (select count(id)::integer from public.properties),
-  4,
+  6,
   'administrator can read all properties through the admin policy'
 );
 reset role;
