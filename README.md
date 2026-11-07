@@ -43,4 +43,5 @@ The property and sponsor examples are synthetic local development records. The A
 ## Project evidence
 
 - [Stakeholder discovery package](docs/discovery-package.md): planning hypotheses, approval-gated research materials, candidate backlog, and planning handoff.
-- Labs 3–5 implementation documentation: see `docs/adr/001-data-contract.md` and `docs/database-setup.md`.
+- Lab 3 contract, schema export, validator, and pending external evidence: [`docs/lab-3-evidence.md`](docs/lab-3-evidence.md), [`docs/adr/001-data-contract.md`](docs/adr/001-data-contract.md), and [`docs/ai-studio-property-prompt.md`](docs/ai-studio-property-prompt.md).
+- Labs 4–5 database setup: [`docs/database-setup.md`](docs/database-setup.md).

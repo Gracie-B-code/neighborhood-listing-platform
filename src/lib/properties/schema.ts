@@ -35,7 +35,10 @@ const PropertyFields = {
   amenities: z.array(AmenitySchema).max(30).refine(
     (amenities) => new Set(amenities).size === amenities.length,
     "Amenities must be unique",
-  ),
+  ).meta({
+    uniqueItems: true,
+    description: "Controlled amenity values; duplicates are not allowed.",
+  }),
 };
 
 export const SponsorReferenceSchema = z.object({
@@ -47,9 +50,16 @@ export const PropertyRecordSchema = z.object({
   property_id: z.string().uuid(),
   ...PropertyFields,
   local_sponsors: z.array(SponsorReferenceSchema).max(20),
-}).strict();
+}).strict().meta({
+  title: "Property record",
+  description: "A normalized property card record with sponsor references.",
+});
 
 export const PropertyRecordListSchema = z.array(PropertyRecordSchema).max(500);
+export const PropertyRecordBatchSchema = z.array(PropertyRecordSchema).length(5).meta({
+  title: "Five synthetic property records",
+  description: "Exactly five fictional property records for Lab 3 structured-output validation.",
+});
 
 export const SponsorRecordSchema = z.object({
   sponsor_id: z.string().uuid(),

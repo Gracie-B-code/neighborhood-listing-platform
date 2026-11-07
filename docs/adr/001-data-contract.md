@@ -9,7 +9,7 @@ The starter repository contains only a landing page. It has no Lab 2 property re
 
 ## Decision
 
-Use the strict Zod schemas in `src/lib/properties/schema.ts` as the single runtime contract and infer TypeScript types from those schemas. `.strict()` rejects unknown fields; finite, bounded numbers and explicit formats reject malformed values before database operations. Tests exercise one valid fixture and the four required failure cases.
+Use the strict Zod schemas in `src/lib/properties/schema.ts` as the single runtime contract and infer TypeScript types from those schemas. `.strict()` rejects unknown fields; finite, bounded numbers and explicit formats reject malformed values before database operations. `npm run schema:export` derives the exact-five-record Draft 2020-12 JSON Schema from that source, and `npm run validate:properties` reports fixture errors without changing the input. Tests exercise valid fixtures, the four required failure cases, and the exported schema shape.
 
 The property contract keeps `price` as a nonnegative amount and adds a required `price_basis` (`purchase`, `monthly_rent`, `weekly_rent`, `daily_rent`, or `other`) plus an ISO-style three-letter currency code. This avoids silently treating an unspecified legacy `price` as either rent or purchase price. There is no existing Lab 2 field or record to map; `local_sponsors` is represented in the API contract as sponsor ID/name references and normalized in storage through `property_sponsors`.
 
@@ -39,6 +39,6 @@ Amenities use a controlled enumeration (`air_conditioning`, `balcony`, `dishwash
 
 - Callers must provide an explicit price basis and currency; new clients must use the current schema.
 - API output includes sponsor names from active, approved sponsor relationships; database storage remains normalized.
-- Synthetic fixtures are local examples, not model output, listing data, or stakeholder evidence.
+- Synthetic fixtures are local examples, not model output, listing data, or stakeholder evidence. The checked-in JSON Schema is generated from Zod and should be refreshed with `npm run schema:export` after contract changes.
 - The real AI Studio structured-output experiment, screenshot, and schema feedback remain student actions. No response was fabricated.
 - A future Lab 2 integration must document its actual fields before adding a compatibility mapper.

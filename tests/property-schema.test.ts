@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import {
   CreatePropertyInputSchema,
+  PropertyRecordBatchSchema,
   PropertyRecordListSchema,
   PropertyRecordSchema,
 } from "../src/lib/properties/schema";
@@ -19,6 +20,12 @@ test("accepts each locally authored synthetic property fixture", () => {
   if (result.success) {
     assert.equal(result.data.length, 5);
   }
+});
+
+test("accepts exactly five synthetic records for the Lab 3 batch", () => {
+  const result = PropertyRecordBatchSchema.safeParse(fixture.records);
+
+  assert.equal(result.success, true);
 });
 
 test("accepts a create input without the optional address line or sponsor IDs", () => {

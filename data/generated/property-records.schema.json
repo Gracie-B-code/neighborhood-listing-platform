@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "minItems": 5,
+  "maxItems": 5,
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "property_id": {
+        "type": "string",
+        "format": "uuid",
+        "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+      },
+      "street_address": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      },
+      "address_line_2": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "city": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 80
+      },
+      "state": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      },
+      "zip_code": {
+        "type": "string",
+        "pattern": "^\\d{5}(?:-\\d{4})?$"
+      },
+      "price": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100000000
+      },
+      "price_basis": {
+        "type": "string",
+        "enum": [
+          "purchase",
+          "monthly_rent",
+          "weekly_rent",
+          "daily_rent",
+          "other"
+        ]
+      },
+      "currency": {
+        "type": "string",
+        "pattern": "^[A-Z]{3}$"
+      },
+      "bedrooms": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "bathrooms": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100,
+        "multipleOf": 0.5
+      },
+      "square_feet": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 1000000
+      },
+      "amenities": {
+        "maxItems": 30,
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "air_conditioning",
+            "balcony",
+            "dishwasher",
+            "gym",
+            "laundry",
+            "parking",
+            "pets_allowed",
+            "pool",
+            "yard"
+          ]
+        },
+        "uniqueItems": true,
+        "description": "Controlled amenity values; duplicates are not allowed."
+      },
+      "local_sponsors": {
+        "maxItems": 20,
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "sponsor_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          },
+          "required": [
+            "sponsor_id",
+            "name"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "property_id",
+      "street_address",
+      "city",
+      "state",
+      "zip_code",
+      "price",
+      "price_basis",
+      "currency",
+      "bedrooms",
+      "bathrooms",
+      "square_feet",
+      "amenities",
+      "local_sponsors"
+    ],
+    "additionalProperties": false,
+    "title": "Property record",
+    "description": "A normalized property card record with sponsor references."
+  },
+  "title": "Five synthetic property records",
+  "description": "Exactly five fictional property records for Lab 3 structured-output validation."
+}

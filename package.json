@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "tsx --test tests/property-schema.test.ts tests/property-filters.test.ts tests/service-schema.test.ts tests/demo-data.test.ts"
+    "test": "tsx --test tests/property-schema.test.ts tests/property-json-schema.test.ts tests/property-filters.test.ts tests/service-schema.test.ts tests/demo-data.test.ts",
+    "schema:export": "tsx scripts/export-property-schema.ts",
+    "validate:properties": "tsx scripts/validate-property-fixtures.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
