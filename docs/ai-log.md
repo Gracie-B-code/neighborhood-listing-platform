@@ -39,6 +39,12 @@ The earlier entries above are preserved as historical project records and were n
 
 | Copilot SDK in VS Code (model identity not surfaced) | Fix local listings by connecting the existing service cards to the local services API without replacing property listings. | Added the home-page Local services section, client-side loading/empty/error UI, and authenticated booking requests through a user-scoped route. | No visual/browser screenshot is claimed; the browser page was not shared for inspection. | `GET /api/services`: 200 with one approved record; authenticated client booking request: 201 requested; temporary client and booking deleted. `npm test` (10 tests), lint, typecheck, and production build passed. Existing pgTAP suite passed 36 assertions in the services-slice run. | None; changes remain uncommitted. |
 
+### Lab 4 discovery follow-up
+
+| Tool/model | Prompt summary | Output used | Output rejected or pending | Verification | Commit |
+|---|---|---|---|---|---|
+| Copilot SDK in VS Code (model identity not surfaced) | Turn the user-provided instructor-approved café-owner simulation into one traceable story and GitHub issue without presenting it as real outreach. | Updated the discovery package with SIM-03 and candidate story B-01; created issue [#4](https://github.com/Gracie-B-code/neighborhood-listing-platform/issues/4) with two Gherkin scenarios, branch link, `enhancement` label, Lab 4 — Week 8 MVP milestone, and assignee `Gracie-B-code`. Created [Lab 4 Board](https://github.com/users/Gracie-B-code/projects/3/views/2) with the five requested statuses and added issues #3 and #4. | No real realtor/café-owner interview, exact quote, Gemini critique, or AI Studio theme output is claimed. The board remains private; team access has not been granted. | Verified issue #4 metadata and contents through GitHub; verified board column order and its two issue items in the project UI. | Pending |
+
 ---
 
 ## Stakeholder Discovery Package (2026-11-02)

@@ -43,5 +43,6 @@ The property and sponsor examples are synthetic local development records. The A
 ## Project evidence
 
 - [Stakeholder discovery package](docs/discovery-package.md): planning hypotheses, approval-gated research materials, candidate backlog, and planning handoff.
+- GitHub planning artifacts: [Lab 4 Board](https://github.com/users/Gracie-B-code/projects/3/views/2), [planning issue #3](https://github.com/Gracie-B-code/neighborhood-listing-platform/issues/3), and [simulated café listing issue #4](https://github.com/Gracie-B-code/neighborhood-listing-platform/issues/4). The board is private; share it with teammates/instructor as appropriate.
 - Lab 3 contract, schema export, validator, and pending external evidence: [`docs/lab-3-evidence.md`](docs/lab-3-evidence.md), [`docs/adr/001-data-contract.md`](docs/adr/001-data-contract.md), and [`docs/ai-studio-property-prompt.md`](docs/ai-studio-property-prompt.md).
 - Labs 4–5 database setup: [`docs/database-setup.md`](docs/database-setup.md).
