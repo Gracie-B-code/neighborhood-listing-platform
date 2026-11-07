@@ -5,11 +5,13 @@ import type { ServiceRecord } from "@/schemas/service";
 type ServiceCardProps = {
   service: ServiceRecord;
   onRequestService: (serviceId: string) => void;
+  readOnly?: boolean;
 };
 
 type ServiceCardGridProps = {
   services: ServiceRecord[];
   onRequestService: (serviceId: string) => void;
+  readOnly?: boolean;
 };
 
 function formatRate(service: ServiceRecord) {
@@ -26,7 +28,7 @@ function formatRate(service: ServiceRecord) {
   return `${price} / ${service.rate_unit}`;
 }
 
-export function ServiceCard({ service, onRequestService }: ServiceCardProps) {
+export function ServiceCard({ service, onRequestService, readOnly = false }: ServiceCardProps) {
   return (
     <article className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <p className="text-sm font-semibold uppercase tracking-wide text-teal-800">
@@ -40,18 +42,26 @@ export function ServiceCard({ service, onRequestService }: ServiceCardProps) {
         {service.city}, {service.state} {service.zip_code}
       </p>
       <p className="mt-1 font-semibold text-slate-900">{formatRate(service)}</p>
-      <button
-        className="mt-5 min-h-11 rounded-md bg-teal-800 px-4 py-2 font-semibold text-white hover:bg-teal-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-800"
-        onClick={() => onRequestService(service.id)}
-        type="button"
-      >
-        Request {service.title}
-      </button>
+      {readOnly
+        ? <p className="mt-5 text-sm text-slate-600">Requests are disabled in this read-only demo.</p>
+        : (
+          <button
+            className="mt-5 min-h-11 rounded-md bg-teal-800 px-4 py-2 font-semibold text-white hover:bg-teal-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-800"
+            onClick={() => onRequestService(service.id)}
+            type="button"
+          >
+            Request {service.title}
+          </button>
+        )}
     </article>
   );
 }
 
-export function ServiceCardGrid({ services, onRequestService }: ServiceCardGridProps) {
+export function ServiceCardGrid({
+  services,
+  onRequestService,
+  readOnly = false,
+}: ServiceCardGridProps) {
   if (services.length === 0) {
     return <p className="text-slate-600">No approved services are available yet.</p>;
   }
@@ -63,7 +73,11 @@ export function ServiceCardGrid({ services, onRequestService }: ServiceCardGridP
     >
       {services.map((service) => (
         <li key={service.id}>
-          <ServiceCard service={service} onRequestService={onRequestService} />
+          <ServiceCard
+            service={service}
+            onRequestService={onRequestService}
+            readOnly={readOnly}
+          />
         </li>
       ))}
     </ul>

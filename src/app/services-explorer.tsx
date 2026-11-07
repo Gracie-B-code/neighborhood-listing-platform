@@ -9,6 +9,10 @@ import {
   type ServiceRecord,
 } from "@/schemas/service";
 
+type ServicesExplorerProps = {
+  readOnly?: boolean;
+};
+
 type ServicesState =
   | { status: "loading" }
   | { status: "error" }
@@ -21,7 +25,7 @@ type RequestState =
   | { status: "success"; serviceId: string }
   | { status: "error"; serviceId: string; message: string };
 
-export default function ServicesExplorer() {
+export default function ServicesExplorer({ readOnly = false }: ServicesExplorerProps) {
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<ServicesState>({ status: "loading" });
   const [requestState, setRequestState] = useState<RequestState>({ status: "idle" });
@@ -131,18 +135,19 @@ export default function ServicesExplorer() {
       <ServiceCardGrid
         services={state.services}
         onRequestService={(serviceId) => void requestService(serviceId)}
+        readOnly={readOnly}
       />
-      {requestState.status === "submitting" && (
+      {!readOnly && requestState.status === "submitting" && (
         <p className="mt-4 text-sm text-slate-700" role="status">
           Sending service request…
         </p>
       )}
-      {requestState.status === "success" && (
+      {!readOnly && requestState.status === "success" && (
         <p className="mt-4 text-sm text-emerald-800" role="status">
           Your service request was sent.
         </p>
       )}
-      {requestState.status === "error" && (
+      {!readOnly && requestState.status === "error" && (
         <p className="mt-4 text-sm text-rose-800" role="alert">
           {requestState.message}
         </p>

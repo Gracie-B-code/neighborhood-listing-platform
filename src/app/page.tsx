@@ -1,8 +1,11 @@
 import ListingsExplorer from "./listings-explorer";
 import ServicesExplorer from "./services-explorer";
 import SponsorsExplorer from "./sponsors-explorer";
+import { isDemoModeEnabled } from "@/lib/demo-mode";
 
 export default function Home() {
+  const demoMode = isDemoModeEnabled();
+
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-12 text-slate-900">
       <div className="mx-auto max-w-5xl">
@@ -15,6 +18,12 @@ export default function Home() {
           </p>
         </header>
 
+        {demoMode && (
+          <p className="mb-8 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950" role="status">
+            Read-only demo with fictional sample data. Service requests and submissions are disabled.
+          </p>
+        )}
+
         <section aria-labelledby="listings-heading" className="mb-12">
           <h2 id="listings-heading" className="mb-5 text-2xl font-bold">
             Approved property listings
@@ -26,7 +35,7 @@ export default function Home() {
           <h2 id="services-heading" className="mb-5 text-2xl font-bold">
             Local services
           </h2>
-          <ServicesExplorer />
+          <ServicesExplorer readOnly={demoMode} />
         </section>
 
         <section aria-labelledby="sponsors-heading" className="mb-12">

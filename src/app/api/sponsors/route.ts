@@ -1,6 +1,8 @@
 import { z } from "zod";
 
 import { SponsorRecordSchema } from "@/lib/properties/schema";
+import { demoSponsors } from "@/lib/demo-data";
+import { isDemoModeEnabled } from "@/lib/demo-mode";
 import {
   createUserSupabaseClient,
   SupabaseConfigurationError,
@@ -17,6 +19,12 @@ const SponsorRowSchema = z.object({
 const noStore = { "Cache-Control": "no-store" };
 
 export async function GET() {
+  if (isDemoModeEnabled()) {
+    return Response.json(z.array(SponsorRecordSchema).parse(demoSponsors), {
+      headers: noStore,
+    });
+  }
+
   let supabase;
   try {
     supabase = await createUserSupabaseClient();

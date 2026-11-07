@@ -4,6 +4,8 @@ import {
   CreatePropertyInputSchema,
   PropertyRecordListSchema,
 } from "@/lib/properties/schema";
+import { demoProperties } from "@/lib/demo-data";
+import { isDemoModeEnabled } from "@/lib/demo-mode";
 import {
   createUserSupabaseClient,
   SupabaseConfigurationError,
@@ -35,6 +37,12 @@ const PublicPropertyRowSchema = z.object({
 const noStore = { "Cache-Control": "no-store" };
 
 export async function GET() {
+  if (isDemoModeEnabled()) {
+    return Response.json(PropertyRecordListSchema.parse(demoProperties), {
+      headers: noStore,
+    });
+  }
+
   let supabase;
   try {
     supabase = await createUserSupabaseClient();
@@ -114,6 +122,13 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (isDemoModeEnabled()) {
+    return Response.json({ error: "Property submissions are disabled in read-only demo mode." }, {
+      status: 503,
+      headers: noStore,
+    });
+  }
+
   if (request.headers.has("origin") && request.headers.get("origin") !== new URL(request.url).origin) {
     return Response.json({ error: "Request origin is not allowed." }, {
       status: 403,

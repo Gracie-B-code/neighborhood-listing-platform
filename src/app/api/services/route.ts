@@ -5,6 +5,8 @@ import {
   ServiceRecordListSchema,
   ServiceRecordSchema,
 } from "@/schemas/service";
+import { demoServices } from "@/lib/demo-data";
+import { isDemoModeEnabled } from "@/lib/demo-mode";
 import {
   createUserSupabaseClient,
   SupabaseConfigurationError,
@@ -37,6 +39,12 @@ function unavailable(message: string, status = 503) {
 }
 
 export async function GET() {
+  if (isDemoModeEnabled()) {
+    return Response.json(ServiceRecordListSchema.parse(demoServices), {
+      headers: noStore,
+    });
+  }
+
   let supabase;
   try {
     supabase = await createUserSupabaseClient();
@@ -76,6 +84,10 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (isDemoModeEnabled()) {
+    return unavailable("Service submissions are disabled in read-only demo mode.");
+  }
+
   if (
     request.headers.has("origin")
     && request.headers.get("origin") !== new URL(request.url).origin

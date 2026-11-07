@@ -3,6 +3,7 @@ import { z } from "zod";
 import {
   ServiceBookingRecordSchema,
 } from "@/schemas/service";
+import { isDemoModeEnabled } from "@/lib/demo-mode";
 import {
   createUserSupabaseClient,
   SupabaseConfigurationError,
@@ -19,6 +20,10 @@ export async function POST(
   request: Request,
   { params }: { params: Promise<{ serviceId: string }> },
 ) {
+  if (isDemoModeEnabled()) {
+    return unavailable("Service requests are disabled in read-only demo mode.");
+  }
+
   if (
     request.headers.has("origin")
     && request.headers.get("origin") !== new URL(request.url).origin

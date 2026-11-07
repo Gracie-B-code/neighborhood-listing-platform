@@ -5,7 +5,8 @@ Connecting local residents, businesses, and essential services in one community 
 ## Deployment
 
 - **Branch preview:** [https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app](https://neighborhood-listing-platform-git-exam-services-3868b7-dev-a365.vercel.app) (`exam/services-booking-eval`; Vercel account access required).
-- This preview currently renders the page, but its property, service, and sponsor APIs need hosted Supabase environment variables before dynamic listing data will load. It is not the production deployment.
+- The Vercel demo can use `DEMO_MODE=true` to serve the same fictional seed listings without exposing the Docker database. This mode is read-only; authenticated submissions and service requests remain disabled.
+- Local development uses Docker Supabase with `DEMO_MODE=false` (the default) and the local environment values in `.env.local`.
 
 ## Tech Stack
 - **Framework:** Next.js (App Router)
