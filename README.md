@@ -4,7 +4,8 @@ Connecting local residents, businesses, and essential services in one community 
 
 ## Deployment
 
-There is no verified Vercel deployment link yet. Add the preview or production URL here after a deployment succeeds.
+- **Branch preview:** [https://neighborhood-listing-platform-qo7mtnkox-dev-a365.vercel.app](https://neighborhood-listing-platform-qo7mtnkox-dev-a365.vercel.app) (`exam/services-booking-eval`; Vercel account access required).
+- This preview currently renders the page, but its property, service, and sponsor APIs need hosted Supabase environment variables before dynamic listing data will load. It is not the production deployment.
 
 ## Tech Stack
 - **Framework:** Next.js (App Router)
