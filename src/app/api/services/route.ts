@@ -27,11 +27,13 @@ const ServiceRowSchema = z.object({
   rate_amount: z.number().nullable(),
   currency: z.string(),
   rate_unit: z.string(),
+  duration_minutes: z.number(),
+  coverage_radius_miles: z.number(),
   created_at: z.string(),
 }).strict();
 
 const publicServiceColumns =
-  "id,title,description,category,city,state,zip_code,rate_amount,currency,rate_unit,created_at";
+  "id,title,description,category,city,state,zip_code,rate_amount,currency,rate_unit,duration_minutes,coverage_radius_miles,created_at";
 const noStore = { "Cache-Control": "no-store" };
 
 function unavailable(message: string, status = 503) {
@@ -174,6 +176,6 @@ export async function POST(request: Request) {
 
   return Response.json({
     service: service.data,
-    status: "pending",
+    status: "draft",
   }, { status: 201, headers: noStore });
 }

@@ -65,6 +65,8 @@ export const demoServices: ServiceRecord[] = [
     rate_amount: 75,
     currency: "USD",
     rate_unit: "hour",
+    duration_minutes: 60,
+    coverage_radius_miles: 15,
     created_at: "2026-11-07T20:28:54.656231+00:00",
   },
 ];

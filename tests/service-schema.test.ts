@@ -16,6 +16,8 @@ const validInput = {
   rate_amount: 75,
   currency: "USD",
   rate_unit: "hour",
+  duration_minutes: 60,
+  coverage_radius_miles: 15,
 };
 
 const validService = {
@@ -40,11 +42,28 @@ test("rejects unknown service fields", () => {
 });
 
 test("rejects negative rates and malformed location data", () => {
+  const shortTitle = CreateServiceInputSchema.safeParse({ ...validInput, title: "HVAC" });
   const negativeRate = CreateServiceInputSchema.safeParse({ ...validInput, rate_amount: -1 });
   const invalidLocation = CreateServiceInputSchema.safeParse({ ...validInput, zip_code: "bad" });
 
+  assert.equal(shortTitle.success, false);
   assert.equal(negativeRate.success, false);
   assert.equal(invalidLocation.success, false);
+});
+
+test("requires a minimum duration and positive bounded coverage radius", () => {
+  assert.equal(
+    CreateServiceInputSchema.safeParse({ ...validInput, duration_minutes: 14 }).success,
+    false,
+  );
+  assert.equal(
+    CreateServiceInputSchema.safeParse({ ...validInput, coverage_radius_miles: 0 }).success,
+    false,
+  );
+  assert.equal(
+    CreateServiceInputSchema.safeParse({ ...validInput, coverage_radius_miles: 501 }).success,
+    false,
+  );
 });
 
 test("accepts an explicitly unpriced service", () => {

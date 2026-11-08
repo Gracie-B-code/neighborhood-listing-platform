@@ -95,7 +95,7 @@ on conflict (id) do update set role = excluded.role;
 
 insert into public.services (
   id, provider_id, title, description, category, city, state, zip_code,
-  rate_amount, currency, rate_unit, status
+  rate_amount, currency, rate_unit, duration_minutes, coverage_radius_miles, status
 )
 values
   (
@@ -103,21 +103,21 @@ values
     '10000000-0000-4000-8000-000000000001',
     'Fictional home repair',
     'Synthetic approved service used for local API and authorization tests.',
-    'home_repair', 'Sampleton', 'CA', '90001', 75, 'USD', 'hour', 'approved'
+    'home_repair', 'Sampleton', 'CA', '90001', 75, 'USD', 'hour', 60, 15, 'approved'
   ),
   (
     'eeeeeeee-eeee-4eee-8eee-eeeeeeeeee01',
     '10000000-0000-4000-8000-000000000001',
     'Synthetic provider draft',
     'Synthetic pending service owned by the first fictional provider.',
-    'cleaning', 'Sampleton', 'CA', '90002', null, 'USD', 'visit', 'pending'
+    'cleaning', 'Sampleton', 'CA', '90002', null, 'USD', 'visit', 60, 10, 'draft'
   ),
   (
     'eeeeeeee-eeee-4eee-8eee-eeeeeeeeee02',
     '40000000-0000-4000-8000-000000000004',
     'Synthetic second provider draft',
     'Synthetic pending service owned by a different fictional provider.',
-    'tutoring', 'Sampleton', 'CA', '90003', 40, 'USD', 'hour', 'pending'
+    'tutoring', 'Sampleton', 'CA', '90003', 40, 'USD', 'hour', 45, 20, 'draft'
   )
 on conflict (id) do nothing;
 

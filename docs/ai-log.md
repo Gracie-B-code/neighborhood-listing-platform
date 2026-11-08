@@ -39,6 +39,15 @@ The earlier entries above are preserved as historical project records and were n
 
 | Copilot SDK in VS Code (model identity not surfaced) | Fix local listings by connecting the existing service cards to the local services API without replacing property listings. | Added the home-page Local services section, client-side loading/empty/error UI, and authenticated booking requests through a user-scoped route. | No visual/browser screenshot is claimed; the browser page was not shared for inspection. | `GET /api/services`: 200 with one approved record; authenticated client booking request: 201 requested; temporary client and booking deleted. `npm test` (10 tests), lint, typecheck, and production build passed. Existing pgTAP suite passed 36 assertions in the services-slice run. | None; changes remain uncommitted. |
 
+### Exam services requirements and verification journal
+
+The following journal uses the required provenance fields. External AI
+critiques are not claimed because they were not performed.
+
+| Step / Tool | Prompt Summary | Model Output Used | Model Output Rejected & Rationale | Verification Method | Associated Git Commit |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Copilot SDK in VS Code | Check the supplied services/booking specification against the current branch; preserve the service-specific role model and authenticated booking security where the rubric conflicts with the existing property schema. | Added duration and coverage fields, draft submissions, stricter booking-read privacy, UI details/accessibility improvements, and requirements traceability. | Did not replace `public.profiles`, allow anonymous bookings, or claim district/active-zone and admin HTTP moderation features that are not present. | Local Supabase reset and 46 pgTAP assertions passed; 17 unit tests, lint, typecheck, and production build passed. Browser keyboard checks used Tab traversal, Shift+Tab, Enter, and Space on the service CTA; unauthenticated requests announced the expected sign-in error. Gemini/ChatGPT reviews were not performed. | This commit |
+
 ### Lab 4 discovery follow-up
 
 | Tool/model | Prompt summary | Output used | Output rejected or pending | Verification | Commit |

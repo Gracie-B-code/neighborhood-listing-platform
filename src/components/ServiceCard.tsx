@@ -34,23 +34,30 @@ export function ServiceCard({ service, onRequestService, readOnly = false }: Ser
       <p className="text-sm font-semibold uppercase tracking-wide text-teal-800">
         {service.category.replaceAll("_", " ")}
       </p>
-      <h3 className="mt-2 text-xl font-bold text-slate-900">{service.title}</h3>
+      <header className="mt-2">
+        <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
+      </header>
       <p className="mt-2 flex-1 text-sm leading-6 text-slate-700">
         {service.description}
       </p>
       <p className="mt-4 text-sm text-slate-700">
         {service.city}, {service.state} {service.zip_code}
       </p>
-      <p className="mt-1 font-semibold text-slate-900">{formatRate(service)}</p>
+      <ul aria-label={`${service.title} details`} className="mt-2 space-y-1 text-sm text-slate-700">
+        <li className="font-semibold text-slate-900">{formatRate(service)}</li>
+        <li>Appointment duration: {service.duration_minutes} minutes</li>
+        <li>Coverage radius: {service.coverage_radius_miles} miles</li>
+      </ul>
       {readOnly
         ? <p className="mt-5 text-sm text-slate-600">Requests are disabled in this read-only demo.</p>
         : (
           <button
-            className="mt-5 min-h-11 rounded-md bg-teal-800 px-4 py-2 font-semibold text-white hover:bg-teal-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-800"
+            aria-label={`Book appointment for ${service.title}`}
+            className="mt-5 min-h-11 rounded-md bg-teal-800 px-4 py-2 font-semibold text-white hover:bg-teal-900 focus-visible:ring-2 focus-visible:ring-teal-700 focus-visible:ring-offset-2"
             onClick={() => onRequestService(service.id)}
             type="button"
           >
-            Request {service.title}
+            Book Now
           </button>
         )}
     </article>
@@ -69,7 +76,7 @@ export function ServiceCardGrid({
   return (
     <ul
       aria-label="Approved local services"
-      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
     >
       {services.map((service) => (
         <li key={service.id}>

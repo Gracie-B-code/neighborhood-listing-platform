@@ -17,7 +17,7 @@ export const ServiceRateUnitSchema = z.enum([
 ]);
 
 const ServiceFields = {
-  title: z.string().trim().min(3).max(120),
+  title: z.string().trim().min(5).max(120),
   description: z.string().trim().min(10).max(2000),
   category: ServiceCategorySchema,
   city: z.string().trim().min(1).max(80),
@@ -26,6 +26,8 @@ const ServiceFields = {
   rate_amount: z.number().finite().min(0).max(1_000_000).nullable(),
   currency: z.string().regex(/^[A-Z]{3}$/, "Use a three-letter currency code"),
   rate_unit: ServiceRateUnitSchema,
+  duration_minutes: z.number().int().min(15).max(1440),
+  coverage_radius_miles: z.number().int().positive().max(500),
 };
 
 export const ServiceRecordSchema = z.object({

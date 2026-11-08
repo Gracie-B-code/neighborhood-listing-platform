@@ -113,7 +113,7 @@ export default function ServicesExplorer({ readOnly = false }: ServicesExplorerP
       <div role="alert" className="rounded-lg border border-rose-200 bg-rose-50 p-4 text-rose-900">
         <p>Services could not be loaded right now.</p>
         <button
-          className="mt-3 min-h-11 rounded-md border border-rose-400 px-3 py-2 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
+          className="mt-3 min-h-11 rounded-md border border-rose-400 px-3 py-2 font-semibold focus-visible:ring-2 focus-visible:ring-rose-700 focus-visible:ring-offset-2"
           onClick={() => {
             setState({ status: "loading" });
             setAttempt((current) => current + 1);

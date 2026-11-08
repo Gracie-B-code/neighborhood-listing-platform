@@ -2,13 +2,13 @@
 
 ## Status and scope
 
-The local Supabase stack is running for this workspace. `supabase db reset` applied the numbered migration and local-only synthetic seed successfully, and `supabase test db` passed all 22 property/sponsor and 20 services/bookings RLS assertions. The property/sponsor tests include approved-content revision capture when owners edit published records. The app's `GET /api/properties` returned HTTP 200 with one approved synthetic listing. Local values are in ignored `.env.local`; no database credentials are committed or recorded here.
+The local Supabase stack is running for this workspace. `supabase db reset` applied the numbered migrations and local-only synthetic seed successfully, and `supabase test db` passed all 22 property/sponsor and 24 services/bookings RLS assertions. The property/sponsor tests include approved-content revision capture when owners edit published records. The app's `GET /api/properties` returned HTTP 200 with one approved synthetic listing. Local values are in ignored `.env.local`; no database credentials are committed or recorded here.
 
 The optional `supabase_vector` container was restarting during the final status check. The database, REST API, and tested property workflow were available; vector functionality is not used by this lab's schema or routes.
 
 ## Separate services/bookings exercise
 
-The exam services subsystem is separate from the Properties/Sponsors Labs 3–5 model above. Its numbered migration is `20261029140000_exam_services_persistence.sql`; it creates `service_profiles`, `services`, and `service_bookings` with independent role and RLS policies. `src/app/api/services/route.ts` uses the session-scoped server client, so normal reads and provider inserts remain subject to RLS. See [the services authorization audit](./security-audit.md) for role-by-role test evidence. The latest local run passed all 20 services-specific RLS assertions.
+The exam services subsystem is separate from the Properties/Sponsors Labs 3–5 model above. Its migrations are `20261029140000_exam_services_persistence.sql` and `20261107150000_exam_services_duration_and_privacy.sql`; together they create `service_profiles`, `services`, and `service_bookings` with independent role and RLS policies. `src/app/api/services/route.ts` uses the session-scoped server client, so normal reads and provider inserts remain subject to RLS. See [the services authorization audit](./security-audit.md) and [services requirements](./requirements.md) for role-by-role test evidence and schema boundaries.
 
 Run the seed only against a disposable local Supabase development database. It creates fictional `auth.users` identities, including a test administrator, with no usable password. Do not apply `supabase/seed.sql` to a hosted project.
 
