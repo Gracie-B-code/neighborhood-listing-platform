@@ -1,48 +1,61 @@
+import ListingsExplorer from "./listings-explorer";
+import ServicesExplorer from "./services-explorer";
+import SponsorsExplorer from "./sponsors-explorer";
+import { isDemoModeEnabled } from "@/lib/demo-mode";
+
 export default function Home() {
-    return (
-        <main className="min-h-screen bg-slate-50 px-6 py-12 text-slate-900">
-            <div className="mx-auto max-w-5xl">
-                {/* Header Section */}
-                <header className="mb-12 text-center">
-                    <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-                        Neighborhood Listing Platform
-                    </h1>
-                    <p className="mt-4 text-lg text-slate-600">
-                        Connecting local residents, businesses, and essential services in one community hub.
-                    </p>
-                </header>
+  const demoMode = isDemoModeEnabled();
 
-                {/* Feature Cards Section */}
-                <section aria-label="Core Features">
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+  return (
+    <main className="min-h-screen bg-slate-50 px-6 py-12 text-slate-900">
+      <div className="mx-auto max-w-5xl">
+        <header className="mb-12 text-center">
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+            Neighborhood Listing Platform
+          </h1>
+          <p className="mt-4 text-lg text-slate-600">
+            Connecting local residents, businesses, and essential services in one community hub.
+          </p>
+        </header>
 
-                        {/* Card 1: Local Listings */}
-                        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
-                            <h2 className="text-xl font-bold text-slate-800">Local Listings</h2>
-                            <p className="mt-2 text-sm text-slate-600">
-                                Discover neighborhood services, items for trade, and community events submitted by verified locals.
-                            </p>
-                        </article>
+        {demoMode && (
+          <p className="mb-8 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950" role="status">
+            Read-only demo with fictional sample data. Service requests and submissions are disabled.
+          </p>
+        )}
 
-                        {/* Card 2: Neighborhood Sponsors */}
-                        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
-                            <h2 className="text-xl font-bold text-slate-800">Neighborhood Sponsors</h2>
-                            <p className="mt-2 text-sm text-slate-600">
-                                Support local small businesses and community sponsors backing our neighborhood programs.
-                            </p>
-                        </article>
+        <section aria-labelledby="listings-heading" className="mb-12">
+          <h2 id="listings-heading" className="mb-5 text-2xl font-bold">
+            Approved property listings
+          </h2>
+          <ListingsExplorer />
+        </section>
 
-                        {/* Card 3: Voice Help */}
-                        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
-                            <h2 className="text-xl font-bold text-slate-800">Voice Help</h2>
-                            <p className="mt-2 text-sm text-slate-600">
-                                Access quick hands-free assistance and voice-guided navigation for local services.
-                            </p>
-                        </article>
+        <section aria-labelledby="services-heading" className="mb-12">
+          <h2 id="services-heading" className="mb-5 text-2xl font-bold">
+            Local services
+          </h2>
+          <ServicesExplorer readOnly={demoMode} />
+        </section>
 
-                    </div>
-                </section>
-            </div>
-        </main>
-    );
+        <section aria-labelledby="sponsors-heading" className="mb-12">
+          <h2 id="sponsors-heading" className="mb-5 text-2xl font-bold">
+            Neighborhood sponsors
+          </h2>
+          <SponsorsExplorer />
+        </section>
+
+        <section aria-label="More platform concepts">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-slate-800">Voice Help</h2>
+              <p className="mt-2 text-sm text-slate-600">
+                Voice-guided navigation remains a future concept and is not currently available.
+              </p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  );
 }
